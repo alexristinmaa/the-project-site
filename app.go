@@ -1,94 +1,88 @@
 package main
 
 import (
+	"database/sql"
+	"encoding/json"
 	"fmt"
-	"io/fs"
 	"log"
 	"net/http"
 	"os"
-	"path"
-	"path/filepath"
+
+	"github.com/julienschmidt/httprouter"
+	_ "github.com/mattn/go-sqlite3"
 )
 
-var sourceMap map[string]string
+var db *sql.DB
 
-func initSourceMap() error {
-	// Loop through the public folder and add folders to the source map
-	sourceMap = make(map[string]string)
+type Post struct {
+	Id        string
+	Title     string
+	Body      string
+	Author_id int
+	Date      int
+}
 
-	err := filepath.Walk("public", func(pathToFile string, info fs.FileInfo, err error) error {
+func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	fmt.Fprint(w, "Welcome!\n")
+}
+
+func individualPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	fmt.Fprintf(w, "hello, %s!\n", ps.ByName("post"))
+}
+
+func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	w.Header().Add("Content-type", "text/json")
+
+	rows, err := db.Query("select Post_ID, Title, Body, Author_ID from posts")
+	if err != nil {
+		fmt.Println(err)
+		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
+		return
+	}
+
+	ret := make([]Post, 0)
+
+	defer rows.Close()
+	for rows.Next() {
+		post := Post{}
+		err = rows.Scan(&post.Id, &post.Title, &post.Body, &post.Author_id, &post.Date)
+
 		if err != nil {
-			fmt.Printf("prevent panic by handling failure accessing a path %q: %v\n", pathToFile, err)
-			return err
+			fmt.Println(err)
+			http.Error(w, "Unknown error occured", http.StatusInternalServerError)
+			return
 		}
 
-		if !info.IsDir() && path.Base(pathToFile) == "index.html" {
-			sourceMap[path.Dir(pathToFile[6:])] = "true" // [6:] is to remove public/ from the path
-		}
+		ret = append(ret, post)
+	}
 
-		return nil
-	})
+	jsonData, err := json.Marshal(ret)
 
 	if err != nil {
-		return err
+		fmt.Println(err)
+		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
+		return
 	}
 
-	return nil
-}
-
-func AssertAndHandle(reqPath string, handler func(http.ResponseWriter, *http.Request)) {
-	// Check if request is a valid path (with an index.html file) or if it has a handler
-
-	http.HandleFunc(reqPath, func(w http.ResponseWriter, r *http.Request) {
-		cleanURL := path.Clean(r.URL.Path)
-		if _, ok := sourceMap[cleanURL]; ok {
-			toServe, err := os.ReadFile(path.Join("public", cleanURL, "index.html"))
-			if err != nil {
-				fmt.Println(err)
-				http.Error(w, "Something Went Wrong: corrupted file?", http.StatusInternalServerError)
-			}
-
-			w.Write(toServe)
-			return
-		} else if cleanURL != reqPath {
-			http.Error(w, "Could not find anything here... are you lost?", http.StatusNotFound)
-			return
-		}
-
-		handler(w, r)
-	})
-}
-
-func hello(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "hello\n")
-}
-
-func headers(w http.ResponseWriter, req *http.Request) {
-	for name, headers := range req.Header {
-		for _, h := range headers {
-			fmt.Fprintf(w, "%v: %v\n", name, h)
-		}
-	}
-}
-
-func base(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "This is our main page!\n")
+	w.Write(jsonData)
 }
 
 func main() {
-	err := initSourceMap()
+	router := httprouter.New()
 
+	db, err := sql.Open("sqlite3", "./foo.db")
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer db.Close()
 
-	fmt.Println(sourceMap)
+	router.NotFound = http.FileServer(http.Dir("frontend/dist")) // ugly solution
 
-	AssertAndHandle("/hello", hello)
-	AssertAndHandle("/headers", headers)
-	AssertAndHandle("/", base)
+	// Overrides all file paths
+	router.GET("/posts/:post", individualPost)
+	router.GET("/posts", allPosts)
 
-	fmt.Println("Server started at: http://localhost:" + os.Getenv("PORT"))
+	fmt.Println("Serving at http://localhost:" + os.Getenv("PORT"))
 
-	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), router))
 }
