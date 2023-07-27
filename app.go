@@ -18,10 +18,17 @@ func headers(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func base(w http.ResponseWriter, req *http.Request) {
+	fmt.Fprintf(w, "This is our main page!\n")
+}
+
 func main() {
 
 	http.HandleFunc("/hello", hello)
 	http.HandleFunc("/headers", headers)
+	http.HandleFunc("/", base)
+
+	fmt.Println("Server started at: http://localhost:" + os.Getenv("PORT"))
 
 	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 }
