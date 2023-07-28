@@ -13,6 +13,7 @@ import (
 )
 
 var db *sql.DB
+var outFmt *os.File
 
 type Post struct {
 	Id        string
@@ -35,7 +36,7 @@ func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	rows, err := db.Query("select Post_ID, Title, Body, Author_ID from posts")
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprint(outFmt, err)
 		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
 		return
 	}
@@ -48,7 +49,7 @@ func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		err = rows.Scan(&post.Id, &post.Title, &post.Body, &post.Author_id, &post.Date)
 
 		if err != nil {
-			fmt.Println(err)
+			fmt.Fprint(outFmt, err)
 			http.Error(w, "Unknown error occured", http.StatusInternalServerError)
 			return
 		}
@@ -59,7 +60,7 @@ func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	jsonData, err := json.Marshal(ret)
 
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprint(outFmt, err)
 		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
 		return
 	}
@@ -70,11 +71,17 @@ func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 func main() {
 	router := httprouter.New()
 
-	db, err := sql.Open("sqlite3", "./foo.db")
+	db, err := sql.Open("sqlite3", "./../foo.db")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close()
+
+	outFmt, err := os.Create("output.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer outFmt.Close()
 
 	router.NotFound = http.FileServer(http.Dir("frontend/dist")) // ugly solution
 
