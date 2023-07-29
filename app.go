@@ -77,6 +77,7 @@ func main() {
 
 	port := "3000"
 	dbPath := "all.db"
+	loggingLocation := "application_logs/error.log"
 
 	if os.Getenv("PORT") != "" {
 		port = os.Getenv("PORT")
@@ -86,7 +87,11 @@ func main() {
 		dbPath = os.Getenv("DB_PATH")
 	}
 
-	f, err := os.OpenFile("/logs/error.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if os.Getenv("LOG_LOC") != "" {
+		loggingLocation = os.Getenv("LOG_LOC")
+	}
+
+	f, err := os.OpenFile(loggingLocation, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatalf("error opening file: %v", err)
 	}
