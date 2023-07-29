@@ -1,5 +1,5 @@
 start.sh
-app
+./app
 all.db
 output.txt
 .vscode
