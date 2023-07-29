@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -37,7 +38,7 @@ func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	rows, err := db.Query("select Post_ID, Title, Body, Author_ID, Date, Description from posts")
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
 		return
 	}
@@ -51,7 +52,7 @@ func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		err = rows.Scan(&post.Id, &post.Title, &post.Body, &post.Author_id, &post.Date, &post.Description)
 
 		if err != nil {
-			fmt.Println(err)
+			log.Println(err)
 			http.Error(w, "Unknown error occured", http.StatusInternalServerError)
 			return
 		}
@@ -62,7 +63,7 @@ func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	jsonData, err := json.Marshal(ret)
 
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
 		return
 	}
@@ -84,6 +85,15 @@ func main() {
 	if os.Getenv("DB_PATH") != "" {
 		dbPath = os.Getenv("DB_PATH")
 	}
+
+	f, err := os.OpenFile("/logs/error.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	defer f.Close()
+
+	wrt := io.MultiWriter(os.Stdout, f)
+	log.SetOutput(wrt)
 
 	db, err = sql.Open("sqlite3", dbPath)
 	if err != nil {
