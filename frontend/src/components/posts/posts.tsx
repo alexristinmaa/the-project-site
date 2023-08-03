@@ -4,7 +4,7 @@ import PostItem from './post/post.tsx'
 
 interface PostObj {
   Title : string,
-  Author_id : string,
+  Author : string,
   Description : string
 }
 
@@ -22,7 +22,7 @@ function PostList() {
 
   return (
     <div className="posts">
-        {posts.map((post : PostObj) => <PostItem name={post.Title} author={post.Author_id} description={post.Description} />)}
+        {posts.map((post : PostObj) => <PostItem name={post.Title} author={post.Author} description={post.Description} />)}
     </div>
   )
 }

@@ -1,27 +1,28 @@
 package main
 
 import (
-	"database/sql"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"time"
 
+	"github.com/jackc/pgx/v5"
 	"github.com/julienschmidt/httprouter"
-	_ "github.com/mattn/go-sqlite3"
 )
 
-var db *sql.DB
+var conn *pgx.Conn
 
 type Post struct {
 	Id          string
 	Title       string
 	Body        string
 	Description string
-	Author_id   int
+	Author      string
 	Date        time.Time
 }
 
@@ -30,13 +31,14 @@ func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 }
 
 func individualPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	log.Println("Thats not goods!?")
 	fmt.Fprintf(w, "hello, %s!\n", ps.ByName("post"))
 }
 
 func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.Header().Add("Content-type", "text/json")
 
-	rows, err := db.Query("select Post_ID, Title, Body, Author_ID, Date, Description from posts")
+	rows, err := conn.Query(context.Background(), "select post_id, title, body, author, description from posts")
 	if err != nil {
 		log.Println(err)
 		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
@@ -49,7 +51,7 @@ func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	for rows.Next() {
 		post := Post{}
-		err = rows.Scan(&post.Id, &post.Title, &post.Body, &post.Author_id, &post.Date, &post.Description)
+		err = rows.Scan(&post.Id, &post.Title, &post.Body, &post.Author, &post.Description)
 
 		if err != nil {
 			log.Println(err)
@@ -75,20 +77,27 @@ func main() {
 	var err error
 	router := httprouter.New()
 
-	port := "3000"
-	dbPath := "all.db"
-	loggingLocation := "application_logs/error.log"
+	port := os.Getenv("PORT")
+	loggingLocation := os.Getenv("LOG_LOC")
+	databaseUrl := os.Getenv("DATABASE_URL")
 
-	if os.Getenv("PORT") != "" {
-		port = os.Getenv("PORT")
+	if port != "" {
+		panic("No port supplied. Add to environment variables")
 	}
 
-	if os.Getenv("DB_PATH") != "" {
-		dbPath = os.Getenv("DB_PATH")
+	if databaseUrl == "" {
+		panic("No DATABASE_URL supplied: add into environment variables (.bashrc)")
 	}
 
-	if os.Getenv("LOG_LOC") != "" {
-		loggingLocation = os.Getenv("LOG_LOC")
+	if loggingLocation != "" {
+		fmt.Println("No logging location supplied: Defaulting to logs/error.log")
+	}
+
+	dirPath := filepath.Dir(loggingLocation)
+	err = os.MkdirAll(dirPath, os.ModePerm)
+
+	if err != nil {
+		log.Fatalf("error creating folder for file: %v", err)
 	}
 
 	f, err := os.OpenFile(loggingLocation, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
@@ -100,11 +109,13 @@ func main() {
 	wrt := io.MultiWriter(os.Stdout, f)
 	log.SetOutput(wrt)
 
-	db, err = sql.Open("sqlite3", dbPath)
+	// urlExample := "postgres://username:password@localhost:5432/database_name"
+	conn, err = pgx.Connect(context.Background(), databaseUrl)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+		os.Exit(1)
 	}
-	defer db.Close()
+	defer conn.Close(context.Background())
 
 	router.NotFound = http.FileServer(http.Dir("frontend/dist")) // ugly solution
 
