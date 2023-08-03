@@ -81,7 +81,7 @@ func main() {
 	loggingLocation := os.Getenv("LOG_LOC")
 	databaseUrl := os.Getenv("DATABASE_URL")
 
-	if port != "" {
+	if port == "" {
 		panic("No port supplied. Add to environment variables")
 	}
 
@@ -89,7 +89,7 @@ func main() {
 		panic("No DATABASE_URL supplied: add into environment variables (.bashrc)")
 	}
 
-	if loggingLocation != "" {
+	if loggingLocation == "" {
 		fmt.Println("No logging location supplied: Defaulting to logs/error.log")
 	}
 
