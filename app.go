@@ -117,8 +117,9 @@ func main() {
 	databaseUser = url.QueryEscape(databaseUser)
 	databasePass = url.QueryEscape(databasePass)
 	databaseName = url.QueryEscape(databaseName)
+	databaseIP = url.QueryEscape(databaseIP)
 
-	databaseUrl := fmt.Sprintf("postgres://%s:%s@localhost:5432/%s", databaseUser, databasePass, databaseName)
+	databaseUrl := fmt.Sprintf("postgres://%s:%s@%s:5432/%s", databaseUser, databasePass, databaseIP, databaseName)
 
 	conn, err = pgx.Connect(context.Background(), databaseUrl)
 	if err != nil {
