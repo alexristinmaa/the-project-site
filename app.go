@@ -79,14 +79,16 @@ func main() {
 
 	port := os.Getenv("PORT")
 	loggingLocation := os.Getenv("LOG_LOC")
-	databaseUrl := os.Getenv("DATABASE_URL")
+	databaseUser := os.Getenv("DATABASE_USER")
+	databasePass := os.Getenv("DATABASE_PASSWORD")
+	databaseName := os.Getenv(("DATABASE_NAME"))
 
 	if port == "" {
 		panic("No port supplied. Add to environment variables")
 	}
 
-	if databaseUrl == "" {
-		panic("No DATABASE_URL supplied: add into environment variables (.bashrc)")
+	if databaseUser == "" || databasePass == "" || databaseName == "" {
+		panic("One of: DATABASE_USER, DATABASE_PASSWORD or DATABASE_NAME not supplied: add into environment variables (.bashrc)")
 	}
 
 	if loggingLocation == "" {
@@ -110,6 +112,8 @@ func main() {
 	log.SetOutput(wrt)
 
 	// urlExample := "postgres://username:password@localhost:5432/database_name"
+	databaseUrl := fmt.Sprintf("postgres://%s:%s@localhost:5432/%s", databaseUser, databasePass, databaseName)
+
 	conn, err = pgx.Connect(context.Background(), databaseUrl)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
