@@ -83,13 +83,14 @@ func main() {
 	databaseUser := os.Getenv("DATABASE_USER")
 	databasePass := os.Getenv("DATABASE_PASSWORD")
 	databaseName := os.Getenv(("DATABASE_NAME"))
+	databaseIP := os.Getenv("DATABASE_IP")
 
 	if port == "" {
 		panic("No port supplied. Add to environment variables")
 	}
 
-	if databaseUser == "" || databasePass == "" || databaseName == "" {
-		panic("One of: DATABASE_USER, DATABASE_PASSWORD or DATABASE_NAME not supplied: add into environment variables (.bashrc)")
+	if databaseUser == "" || databasePass == "" || databaseName == "" || databaseIP == "" {
+		panic("One of: DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME or DATABASE_IP not supplied: add into environment variables (.bashrc)")
 	}
 
 	if loggingLocation == "" {
