@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"time"
@@ -112,6 +113,10 @@ func main() {
 	log.SetOutput(wrt)
 
 	// urlExample := "postgres://username:password@localhost:5432/database_name"
+	databaseUser = url.QueryEscape(databaseUser)
+	databasePass = url.QueryEscape(databasePass)
+	databaseName = url.QueryEscape(databaseName)
+
 	databaseUrl := fmt.Sprintf("postgres://%s:%s@localhost:5432/%s", databaseUser, databasePass, databaseName)
 
 	conn, err = pgx.Connect(context.Background(), databaseUrl)
