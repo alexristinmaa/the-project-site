@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="163.683 119.796 559.59 135.272" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs/>
+<clipPath id="ArtboardFrame">
+<rect height="135.272" width="559.59" x="163.683" y="119.796"/>
+</clipPath>
+<g clip-path="url(#ArtboardFrame)" id="Layer" vectornator:layerName="Layer">
+<g opacity="1" vectornator:layerName="Group 4">
+<text fill="#1a1c26" font-family="Avenir-Heavy" font-size="60" opacity="1" stroke="none" text-anchor="start" transform="matrix(1 0 0 1 161.847 101.108)" vectornator:layerName="Text 3" vectornator:width="593.568" x="0" y="0">
+<tspan font-size="48" font-weight="bold" textLength="92.448" x="0" y="64">THE</tspan>
+<tspan fill="#d84e50" font-size="64" font-weight="bold" textLength="165.888" x="92.448" y="64"> RED </tspan>
+<tspan font-weight="bold" textLength="235.56" x="258.336" y="64">PARROT</tspan>
+</text>
+<text fill="#4f515e" font-family="Avenir-Book" font-size="54" opacity="1" stroke="none" text-anchor="start" transform="matrix(1 0 0 1 458.631 188.108)" vectornator:layerName="Text 4" vectornator:width="270.03" x="0" y="0">
+<tspan textLength="267.03" x="0" y="54">in my mind</tspan>
+</text>
+</g>
+</g>
+</svg>

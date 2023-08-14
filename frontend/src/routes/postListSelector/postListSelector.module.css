@@ -1,0 +1,28 @@
+#selector {
+    display: inline-block;
+}
+
+#selector * {
+    margin-left: 8px;
+}
+
+#selector a:first-child {
+    margin-left: 0px !important;
+}
+
+#selector a {
+    width: 10px;
+    height: 10px;
+    padding: 2px 8px;
+    border: 1px solid var(--lightgray);
+    border-radius: 5px;
+    
+    color: var(--gray);
+    text-decoration: none;
+}
+
+#selector .active {
+    border: 1px solid var(--red);
+    background-color: var(--red);
+    color: white;
+}

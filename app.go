@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"mime"
 	"net/http"
 	"net/url"
 	"os"
@@ -24,22 +25,42 @@ type Post struct {
 	Body        string
 	Description string
 	Author      string
+	AuthorName  string
 	Date        time.Time
 }
 
-func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	fmt.Fprint(w, "Welcome!\n")
+func serveIndex(w http.ResponseWriter, r *http.Request) {
+	// If it has extension -> Handle it as a file, else return index.html
+	cleanUrl := filepath.Clean(r.URL.Path)
+	extension := filepath.Ext(cleanUrl)
+
+	var file []byte
+	var err error
+
+	if extension == "" {
+		file, err = os.ReadFile("./frontend/dist/index.html")
+	} else {
+		file, err = os.ReadFile(filepath.Join("./frontend/dist/" + cleanUrl))
+	}
+
+	if err != nil {
+		log.Println(err)
+		fmt.Fprintf(w, "Error reading file %s", cleanUrl)
+		return
+	}
+
+	w.Header().Add("Content-Type", mime.TypeByExtension(extension))
+	w.Write(file)
 }
 
 func individualPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	log.Println("Thats not goods!?")
-	fmt.Fprintf(w, "hello, %s!\n", ps.ByName("post"))
+	fmt.Fprintf(w, "hello, %s!\n", ps.ByName("postId"))
 }
 
 func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.Header().Add("Content-type", "text/json")
 
-	rows, err := conn.Query(context.Background(), "select post_id, title, body, author, description from posts")
+	rows, err := conn.Query(context.Background(), "select post_id, title, body, author, author_name, description from posts")
 	if err != nil {
 		log.Println(err)
 		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
@@ -52,7 +73,7 @@ func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	for rows.Next() {
 		post := Post{}
-		err = rows.Scan(&post.Id, &post.Title, &post.Body, &post.Author, &post.Description)
+		err = rows.Scan(&post.Id, &post.Title, &post.Body, &post.Author, &post.AuthorName, &post.Description)
 
 		if err != nil {
 			log.Println(err)
@@ -76,7 +97,6 @@ func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 func main() {
 	var err error
-	router := httprouter.New()
 
 	port := os.Getenv("PORT")
 	loggingLocation := os.Getenv("LOG_LOC")
@@ -128,13 +148,17 @@ func main() {
 	}
 	defer conn.Close(context.Background())
 
-	router.NotFound = http.FileServer(http.Dir("frontend/dist")) // ugly solution
+	router := httprouter.New()
 
-	// Overrides all file paths
-	router.GET("/posts/:post", individualPost)
-	router.GET("/posts", allPosts)
+	router.GET("/api/posts/:postId", individualPost)
+	router.GET("/api/posts", allPosts)
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", serveIndex)
+
+	mux.Handle("/api/", router)
 
 	fmt.Println("Serving at http://localhost:" + port)
 
-	log.Fatal(http.ListenAndServe(":"+port, router))
+	log.Fatal(http.ListenAndServe(":"+port, mux))
 }

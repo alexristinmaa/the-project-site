@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;600&family=Open+Sans:ital,wght@0,400;1,300&display=swap');
+
+:root {
+    --black: #1A1C26;
+    --gray: #4F515E;
+    --lightgray: #A7A9AD;
+    --tag-background: #B5CCDE;
+    --tag-text: #172D9C;
+    --red: #D84E50;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    font-family: 'Avenir Light';
+    font-weight: lighter;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.inline-icon {
+    height: 0.8rem;
+}
+
+.search-icon {
+    background: url('../search-icon.svg');
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    /* Other styles here */
+  }

@@ -1,0 +1,253 @@
+@import "root.screens.css";
+
+#root {
+    padding: 0px 64px;
+    margin: 0 auto;
+
+    background-image: url("../Background-curve.svg");
+    background-repeat: no-repeat;
+    background-size: 100% 360px;
+    background-position: 50% -200px;
+
+    
+    position: relative;
+    padding-bottom: 100px;
+}
+
+#main {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+#header {
+    padding-top: 40px;
+    display: flex;
+    align-items:start;
+    padding-bottom: 55px;
+}
+
+.logo {
+    max-width: 100%;
+    width: 260px;
+    height: auto;
+}
+
+#navContainer {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+}
+
+nav {
+    padding-top: 7px;
+    display: flex;
+}
+
+nav span {
+    margin-left: 40px;
+}
+
+nav span:first-child {
+    margin-left: 0px;
+}
+
+#menuButton {
+    width: 40px;
+    height: 35px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    transition: transform 0.5s;
+
+    visibility: collapse;
+}
+
+#menuButton div {
+    border-radius: 5px;
+    height: 5px;
+    background-color: var(--black);
+    width: 100%;
+}
+
+@keyframes menuRotate {
+    0% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(90deg);
+              transform: rotate(90deg);
+    }
+}
+
+#menuButton.active {
+    transform: rotate(90deg);
+}
+
+#featured {
+    width: 100%;
+    max-height: 60vh;
+    margin-top: 70px;
+
+    display: flex;
+}
+
+#featuredImage img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+#featuredText {
+    padding: 0 50px;
+    padding-bottom: 5px;
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+.date {
+    margin: 0px;
+    font-family: 'Avenir Light';
+    font-weight: 100;
+    font-size: 17px;
+    color: var(--gray);
+}
+
+.header {
+    font-family: 'Avenir Heavy';
+    margin: 0;
+    margin-top: 13px;
+    color: var(--black);
+    font-size: 28px;
+}
+
+.description {
+    margin: 0;
+    margin-top: 20px;
+    font-size: 23px;
+    color: var(--gray);
+}
+
+.footer {
+    margin-top: auto;
+}
+
+.divisor {
+    margin-top: 8px;
+    height: 1px;
+    width: 100%;
+    background-color: var(--lightgray);
+    opacity: 0.25;
+}
+
+.tag {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 4px 6px;
+    border-radius: 5px;
+    background-color: var(--tag-background);
+    color: var(--tag-text);
+}
+
+#latestHeader {
+    margin: 0;
+    margin-top: 130px;
+    font-family: 'Avenir Heavy';
+    font-size: 50px;
+    color: var(--red);
+    text-align: center;
+}
+
+#latestList {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+#selector {
+    margin: 0;
+    margin-top: 40px;
+    text-align: center;
+}
+
+#search {
+    text-align: center;
+}
+
+#looking {
+    margin: 0;
+    margin-top: 200px;
+    font-family: 'Avenir Heavy';
+    font-size: 50px;
+    color: var(--black);
+}
+
+#looking span {
+    color: var(--red);
+}
+
+#searchBar {
+    margin-top: 70px;
+}
+
+#searchBar i {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    top: 5px;
+    left: 50px;
+}
+
+#searchBar input {
+    width: 60%;
+    display: inline-block;
+    max-width: 800px;
+    height: 60px;
+    border-radius: 10px;
+    border: 1px solid var(--lightgray);
+    padding-left: 60px;
+
+    font-family: 'Avenir Light';
+
+    font-size: 30px;
+    color: var(--gray);
+}
+
+#searchBar input::placeholder {
+    color: var(--lightgray);
+}
+
+#categoriesHeader {
+    margin: 0;
+    margin-top: 100px;
+    font-family: 'Avenir Heavy';
+    font-size: 42px;
+    color: var(--black);
+}
+
+#categoriesHeader span {
+    color: var(--red);
+}
+
+#categories {
+    display: flex;
+    overflow-x: scroll;
+    margin-top: 30px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    
+    display: flex;
+    justify-content: space-around;
+}
+
