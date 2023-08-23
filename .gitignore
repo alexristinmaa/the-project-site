@@ -3,3 +3,4 @@ start.sh
 all.db
 output.txt
 .vscode
+.DS_STORE
