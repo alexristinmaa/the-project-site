@@ -1,36 +1,12 @@
-@media only screen and (max-width: 1200px)  {
-    #featuredText {
-        font-size: 15px;
-    }
-
-    .header {
-        font-size: 23px !important;
-    }
-    
-    .date {
-        font-size: 16px !important;
-    }
-    
-    .description {
-        font-size: 19px !important;
+@media only screen and (max-width: 1300px) {
+    footer {
+        left: 0 !important;
     }
 }
 
-@media only screen and (max-width: 920px)  {
-    #featured {
-        flex-direction: column;
-        max-height: fit-content !important;
-    }
-
-    #featuredText {
-        padding: 0px !important;
-        margin-top: 10px;
-        min-width: fit-content !important;
-    }
-
-    #latestList {
-        flex-direction: column;
-        max-height: fit-content;
+@media screen and (max-width: 980px) {
+    #latest {
+        min-height: fit-content !important;
     }
 }
 
@@ -51,7 +27,7 @@
         visibility: visible;
     }
 
-    nav span {
+    nav a {
         margin-left: auto !important;
         margin-top: 4px;
     }

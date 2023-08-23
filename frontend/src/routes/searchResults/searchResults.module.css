@@ -1,0 +1,8 @@
+.searchResults {
+    text-align: center;
+    height: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px 0;
+}

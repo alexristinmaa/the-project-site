@@ -480,3 +480,205 @@ created by net/http.(*Server).Serve
 2023/08/14 19:03:14 open frontend/dist/apple-touch-icon-precomposed.png: no such file or directory
 2023/08/14 19:03:14 open frontend/dist/apple-touch-icon.png: no such file or directory
 2023/08/14 19:03:14 open frontend/dist/favicon.ico: no such file or directory
+2023/08/17 12:46:22 open ./frontend/dist/index.html: no such file or directory
+2023/08/17 12:46:22 open frontend/dist/favicon.ico: no such file or directory
+2023/08/17 12:46:24 open ./frontend/dist/index.html: no such file or directory
+2023/08/17 12:46:24 open ./frontend/dist/index.html: no such file or directory
+2023/08/17 12:46:46 open ./frontend/dist/index.html: no such file or directory
+2023/08/17 12:46:47 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 14:27:52 open frontend/dist/apple-touch-icon-precomposed.png: no such file or directory
+2023/08/18 14:27:52 open frontend/dist/apple-touch-icon.png: no such file or directory
+2023/08/18 14:27:52 open frontend/dist/favicon.ico: no such file or directory
+2023/08/18 14:39:59 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:39:59 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:39:59 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:40:10 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:40:10 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:40:10 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:40:35 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:40:35 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:40:35 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:40:38 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:40:38 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:40:38 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:40:44 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:40:44 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:40:45 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:40:45 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:41:06 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:41:22 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:41:22 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:41:22 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:41:45 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:41:45 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:41:45 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:41:47 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:41:47 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:41:50 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:41:50 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:41:50 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:42:06 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:42:06 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:42:07 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:42:07 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:42:12 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:42:12 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:42:16 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:42:16 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:42:16 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:42:24 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:42:24 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:42:35 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:42:35 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:42:35 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:42:39 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:42:39 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:42:39 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:43:00 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:43:00 open frontend/dist/posts/page/test-thumbnail.jpeg: no such file or directory
+2023/08/18 14:43:00 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:43:51 open frontend/dist/test-thumbnailnail.jpeg: no such file or directory
+2023/08/18 14:43:51 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:44:18 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:44:30 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:44:30 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:56:47 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:56:54 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:56:54 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 14:56:57 open frontend/dist/posts/page/logo.png: no such file or directory
+2023/08/18 15:23:09 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 15:23:09 open frontend/dist/favicon.ico: no such file or directory
+2023/08/18 15:23:11 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 15:23:11 open frontend/dist/favicon.ico: no such file or directory
+2023/08/18 15:23:12 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 15:23:12 open frontend/dist/favicon.ico: no such file or directory
+2023/08/18 15:23:14 open frontend/dist/favicon.ico: no such file or directory
+2023/08/18 15:23:17 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 15:23:17 open frontend/dist/favicon.ico: no such file or directory
+2023/08/18 15:39:01 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 15:39:01 open frontend/dist/favicon.ico: no such file or directory
+2023/08/18 15:39:03 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 15:39:03 open frontend/dist/favicon.ico: no such file or directory
+2023/08/18 17:21:35 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 17:25:53 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 17:25:53 open frontend/dist/favicon.ico: no such file or directory
+2023/08/18 17:25:56 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 17:25:56 open frontend/dist/favicon.ico: no such file or directory
+2023/08/18 17:25:57 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 17:25:57 open frontend/dist/favicon.ico: no such file or directory
+2023/08/18 18:51:45 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 18:51:46 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 18:52:13 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 18:52:14 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 20:16:50 open ./frontend/dist/index.html: no such file or directory
+2023/08/18 20:16:50 open frontend/dist/favicon.ico: no such file or directory
+2023/08/19 10:52:02 open ./frontend/dist/index.html: no such file or directory
+2023/08/19 10:52:02 open frontend/dist/favicon.ico: no such file or directory
+2023/08/19 15:07:18 open frontend/dist/favicon.ico: no such file or directory
+2023/08/19 15:33:19 open ./frontend/dist/index.html: no such file or directory
+2023/08/19 15:33:19 open frontend/dist/favicon.ico: no such file or directory
+2023/08/19 15:33:20 open ./frontend/dist/index.html: no such file or directory
+2023/08/19 15:33:20 open frontend/dist/favicon.ico: no such file or directory
+2023/08/19 15:33:20 open ./frontend/dist/index.html: no such file or directory
+2023/08/19 15:33:20 open frontend/dist/favicon.ico: no such file or directory
+2023/08/20 12:14:07 open ./frontend/dist/index.html: no such file or directory
+2023/08/20 12:14:07 open frontend/dist/favicon.ico: no such file or directory
+2023/08/20 13:10:11 open ./frontend/dist/index.html: no such file or directory
+2023/08/20 13:10:11 open frontend/dist/favicon.ico: no such file or directory
+2023/08/21 15:50:05 open ./frontend/dist/index.html: no such file or directory
+2023/08/21 21:36:05 open ./frontend/dist/index.html: no such file or directory
+2023/08/21 21:36:05 open frontend/dist/favicon.ico: no such file or directory
+2023/08/21 22:24:25 open ./frontend/dist/index.html: no such file or directory
+2023/08/21 22:24:25 open frontend/dist/favicon.ico: no such file or directory
+2023/08/21 22:43:49 open ./frontend/dist/index.html: no such file or directory
+2023/08/21 22:43:50 open frontend/dist/favicon.ico: no such file or directory
+2023/08/21 22:45:00 open ./frontend/dist/index.html: no such file or directory
+2023/08/21 22:45:00 open frontend/dist/favicon.ico: no such file or directory
+2023/08/21 23:03:48 open frontend/dist/apple-touch-icon-precomposed.png: no such file or directory
+2023/08/21 23:03:48 open frontend/dist/apple-touch-icon.png: no such file or directory
+2023/08/22 00:01:41 can't scan into dest[0]: cannot scan varchar (OID 1043) in text format into string
+2023/08/22 00:01:42 can't scan into dest[0]: cannot scan varchar (OID 1043) in text format into string
+2023/08/22 20:03:11 conn busy
+2023/08/22 20:03:28 open frontend/dist/favicon.ico: no such file or directory
+2023/08/22 23:54:49 open ./frontend/dist/index.html: no such file or directory
+2023/08/22 23:54:49 open frontend/dist/favicon.ico: no such file or directory
+2023/08/22 23:54:50 open ./frontend/dist/index.html: no such file or directory
+2023/08/22 23:54:50 open frontend/dist/favicon.ico: no such file or directory
+2023/08/22 23:54:51 open ./frontend/dist/index.html: no such file or directory
+2023/08/22 23:54:51 open frontend/dist/favicon.ico: no such file or directory
+2023/08/22 23:54:57 open ./frontend/dist/index.html: no such file or directory
+2023/08/22 23:54:57 open frontend/dist/favicon.ico: no such file or directory
+2023/08/22 23:55:01 open ./frontend/dist/index.html: no such file or directory
+2023/08/22 23:55:01 open frontend/dist/favicon.ico: no such file or directory
+2023/08/22 23:55:03 open ./frontend/dist/index.html: no such file or directory
+2023/08/22 23:55:03 open frontend/dist/favicon.ico: no such file or directory
+2023/08/22 23:55:04 open ./frontend/dist/index.html: no such file or directory
+2023/08/22 23:55:04 open frontend/dist/favicon.ico: no such file or directory
+2023/08/22 23:55:04 open frontend/dist/favicon.ico: no such file or directory
+2023/08/22 23:55:04 open frontend/dist/favicon.ico: no such file or directory
+2023/08/22 23:55:08 open ./frontend/dist/index.html: no such file or directory
+2023/08/22 23:55:08 open frontend/dist/favicon.ico: no such file or directory
+2023/08/23 00:13:00 ERROR: syntax error at or near "=" (SQLSTATE 42601)
+2023/08/23 00:13:01 ERROR: syntax error at or near "=" (SQLSTATE 42601)
+2023/08/23 00:13:26 ERROR: syntax error at or near "=" (SQLSTATE 42601)
+2023/08/23 00:14:07 ERROR: syntax error at or near "=" (SQLSTATE 42601)
+2023/08/23 00:14:15 expected 0 arguments, got 1
+2023/08/23 00:15:31 expected 0 arguments, got 1
+2023/08/23 00:27:21 failed to encode args[0]: unable to encode []string{} into text format for text (OID 25): cannot find encode plan
+2023/08/23 00:27:54 http: panic serving 192.168.1.8:52648: runtime error: index out of range [0] with length 0
+goroutine 6 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1850 +0xbf
+panic({0x14d6880, 0xc00033e0a8})
+	/usr/local/go/src/runtime/panic.go:890 +0x262
+main.allPosts({0x15ad5c0, 0xc00034e0e0}, 0xc000366000, {0x4?, 0xc000348080?, 0xc0001219e0?})
+	/Users/alexanderristinmaa/Documents/the-project-site/app.go:92 +0xa33
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0xc00007c6c0, {0x15ad5c0, 0xc00034e0e0}, 0xc000366000)
+	/Users/alexanderristinmaa/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x81c
+net/http.(*ServeMux).ServeHTTP(0x0?, {0x15ad5c0, 0xc00034e0e0}, 0xc000366000)
+	/usr/local/go/src/net/http/server.go:2487 +0x149
+net/http.serverHandler.ServeHTTP({0x15ac268?}, {0x15ad5c0, 0xc00034e0e0}, 0xc000366000)
+	/usr/local/go/src/net/http/server.go:2947 +0x30c
+net/http.(*conn).serve(0xc000000dc0, {0x15adbc0, 0xc0001711a0})
+	/usr/local/go/src/net/http/server.go:1991 +0x607
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3102 +0x4db
+2023/08/23 00:27:54 http: panic serving 192.168.1.8:52649: runtime error: index out of range [0] with length 0
+goroutine 8 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1850 +0xbf
+panic({0x14d6880, 0xc00033e138})
+	/usr/local/go/src/runtime/panic.go:890 +0x262
+main.allPosts({0x15ad5c0, 0xc00034e1c0}, 0xc0001c2500, {0x4?, 0x1?, 0xc0001239e0?})
+	/Users/alexanderristinmaa/Documents/the-project-site/app.go:92 +0xa33
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0xc00007c6c0, {0x15ad5c0, 0xc00034e1c0}, 0xc0001c2500)
+	/Users/alexanderristinmaa/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x81c
+net/http.(*ServeMux).ServeHTTP(0x0?, {0x15ad5c0, 0xc00034e1c0}, 0xc0001c2500)
+	/usr/local/go/src/net/http/server.go:2487 +0x149
+net/http.serverHandler.ServeHTTP({0x15ac268?}, {0x15ad5c0, 0xc00034e1c0}, 0xc0001c2500)
+	/usr/local/go/src/net/http/server.go:2947 +0x30c
+net/http.(*conn).serve(0xc000000fa0, {0x15adbc0, 0xc0001711a0})
+	/usr/local/go/src/net/http/server.go:1991 +0x607
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3102 +0x4db
+2023/08/23 00:27:54 http: panic serving 192.168.1.8:52650: runtime error: index out of range [0] with length 0
+goroutine 37 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1850 +0xbf
+panic({0x14d6880, 0xc00033e1c8})
+	/usr/local/go/src/runtime/panic.go:890 +0x262
+main.allPosts({0x15ad5c0, 0xc00034e2a0}, 0xc000366100, {0x4?, 0x1?, 0xc0000689e0?})
+	/Users/alexanderristinmaa/Documents/the-project-site/app.go:92 +0xa33
+github.com/julienschmidt/httprouter.(*Router).ServeHTTP(0xc00007c6c0, {0x15ad5c0, 0xc00034e2a0}, 0xc000366100)
+	/Users/alexanderristinmaa/go/pkg/mod/github.com/julienschmidt/httprouter@v1.3.0/router.go:387 +0x81c
+net/http.(*ServeMux).ServeHTTP(0x0?, {0x15ad5c0, 0xc00034e2a0}, 0xc000366100)
+	/usr/local/go/src/net/http/server.go:2487 +0x149
+net/http.serverHandler.ServeHTTP({0x15ac268?}, {0x15ad5c0, 0xc00034e2a0}, 0xc000366100)
+	/usr/local/go/src/net/http/server.go:2947 +0x30c
+net/http.(*conn).serve(0xc00037c000, {0x15adbc0, 0xc0001711a0})
+	/usr/local/go/src/net/http/server.go:1991 +0x607
+created by net/http.(*Server).Serve
+	/usr/local/go/src/net/http/server.go:3102 +0x4db
+2023/08/23 00:48:13 number of field descriptions must equal number of destinations, got 2 and 7
+2023/08/23 00:49:19 number of field descriptions must equal number of destinations, got 6 and 7
+2023/08/23 22:22:37 conn busy

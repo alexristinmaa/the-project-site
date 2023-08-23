@@ -1,3 +1,9 @@
+#selectorBox {
+    margin: 0;
+    text-align: center;
+    margin-top: 40px;
+}
+
 #selector {
     display: inline-block;
 }

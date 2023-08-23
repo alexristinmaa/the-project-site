@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"mime"
 	"net/http"
@@ -26,7 +27,24 @@ type Post struct {
 	Description string
 	Author      string
 	AuthorName  string
+	Tags        []string
 	Date        time.Time
+}
+
+type Tag struct {
+	Name  string
+	Count int
+}
+
+type PostResponse struct {
+	Posts []Post
+	Pages int
+}
+
+type SearchArguments struct {
+	Page   int      `json:"page"`
+	Tags   []string `json:"tags"`
+	Search string   `json:"search"`
 }
 
 func serveIndex(w http.ResponseWriter, r *http.Request) {
@@ -58,9 +76,36 @@ func individualPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params
 }
 
 func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	w.Header().Add("Content-type", "text/json")
+	searchArguments := SearchArguments{}
+	body, err := ioutil.ReadAll(r.Body)
 
-	rows, err := conn.Query(context.Background(), "select post_id, title, body, author, author_name, description from posts")
+	err = json.Unmarshal(body, &searchArguments)
+
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Incorrect data supplied", http.StatusInternalServerError)
+		return
+	}
+
+	defer r.Body.Close()
+
+	var rows pgx.Rows
+	nPosts := 4
+	offset := (searchArguments.Page - 1) * 4
+	isRaw := len(searchArguments.Tags) == 0 && searchArguments.Search == ""
+
+	if searchArguments.Page == 1 && isRaw {
+		nPosts = 3
+	} else if isRaw {
+		offset--
+	}
+
+	if len(searchArguments.Tags) == 0 {
+		rows, err = conn.Query(context.Background(), "select post_id, title, body, author, author_name, description, tags, date from posts limit $1 offset $2", nPosts, offset)
+	} else {
+		rows, err = conn.Query(context.Background(), "SELECT post_id, title, body, author, author_name, description, tags, date FROM posts WHERE posts.tags::text[] && $1 limit $2 offset $3", searchArguments.Tags, nPosts, offset)
+	}
+
 	if err != nil {
 		log.Println(err)
 		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
@@ -69,11 +114,11 @@ func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	defer rows.Close()
 
-	ret := make([]Post, 0)
+	posts := make([]Post, 0)
 
 	for rows.Next() {
 		post := Post{}
-		err = rows.Scan(&post.Id, &post.Title, &post.Body, &post.Author, &post.AuthorName, &post.Description)
+		err = rows.Scan(&post.Id, &post.Title, &post.Body, &post.Author, &post.AuthorName, &post.Description, &post.Tags, &post.Date)
 
 		if err != nil {
 			log.Println(err)
@@ -81,7 +126,71 @@ func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 			return
 		}
 
-		ret = append(ret, post)
+		posts = append(posts, post)
+	}
+
+	var pages int
+	var row pgx.Row
+
+	if len(searchArguments.Tags) == 0 {
+		row = conn.QueryRow(context.Background(), "select count(*) from posts")
+	} else {
+		row = conn.QueryRow(context.Background(), "select count(*) from posts where tags && $1", searchArguments.Tags)
+	}
+
+	err = row.Scan(&pages)
+
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
+		return
+	}
+
+	if isRaw {
+		pages = pages/4 + 1
+	} else {
+		pages = (pages-1)/4 + 1
+	}
+
+	res := PostResponse{posts, pages}
+
+	jsonData, err := json.Marshal(res)
+
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Add("Content-type", "application/json")
+	w.Write(jsonData)
+}
+
+func getTags(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	w.Header().Add("Content-type", "text/json")
+
+	rows, err := conn.Query(context.Background(), "SELECT tag, COUNT(tag) FROM (SELECT UNNEST(tags) AS tag FROM posts) tag GROUP BY tag")
+
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
+		return
+	}
+
+	ret := make([]Tag, 0)
+
+	for rows.Next() {
+		tag := Tag{}
+
+		err = rows.Scan(&tag.Name, &tag.Count)
+
+		if err != nil {
+			log.Println(err)
+			http.Error(w, "Unknown error occured", http.StatusInternalServerError)
+			return
+		}
+
+		ret = append(ret, tag)
 	}
 
 	jsonData, err := json.Marshal(ret)
@@ -151,7 +260,9 @@ func main() {
 	router := httprouter.New()
 
 	router.GET("/api/posts/:postId", individualPost)
-	router.GET("/api/posts", allPosts)
+	router.GET("/api/getTags", getTags)
+
+	router.POST("/api/posts", allPosts)
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", serveIndex)

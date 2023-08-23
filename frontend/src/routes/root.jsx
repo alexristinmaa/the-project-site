@@ -1,22 +1,25 @@
 import {
-    useLoaderData
+    useLoaderData,
+    Link,
+    Outlet,
+    ScrollRestoration
 } from "react-router-dom";
 
-import { getPosts } from "../scripts/posts";
+import { getNumberOfPages, getFeaturedPost } from "../scripts/posts";
 
-import PostListItem from "./postListItem/postListItem";
-import PostListSelector from "./postListSelector/postListSelector";
 import CategoryItems from "./categoryItems/categoryItems";
+import { FeaturedPost } from "./featuredPost/featuredPost";
 
 import style from "./root.module.css"
 
 export async function loader() {
-  const posts = await getPosts();
-  return { posts };
+  const featuredPost = await getFeaturedPost();
+
+  return {featuredPost};
 }
 
 export default function Root() {
-    const {posts} = useLoaderData();
+    const {featuredPost} = useLoaderData();
 
     function menuClick(e) {
         if(e.target.id != style.menuButton) {
@@ -33,7 +36,7 @@ export default function Root() {
         <>
             <div id={style.root}>
                 <header id={style.header}>
-                    <img src="logo.png" alt="The Red Parrot in my mind" className={style.logo} />
+                    <img src="/logo.png" alt="The Red Parrot in my mind" className={style.logo} />
                     <div id={style.navContainer}>
                         <div id={style.menuButton} onClick={menuClick}>
                             <div></div>
@@ -41,35 +44,18 @@ export default function Root() {
                             <div></div>
                         </div>
                         <nav>
-                            <span>What is this place?</span>
-                            <span>Who am I?</span>
+                            <Link to="/about">What is this place?</Link>
+                            <Link to="/me">Who am I?</Link>
                         </nav>
                     </div>
                 </header>
                 <main id={style.main}>
-                    <article id={style.featured}>
-                        <div id={style.featuredImage}>
-                            <img src="test-thumbnail.jpeg" alt="A Test Thumbail"/>
-                        </div>
-                        <div id={style.featuredText}>
-                            <p className={style.date}>August 9, 2023</p>
-                            <h2 className={style.header}>Injecting XXS Payloads into Web Applications using Three.js</h2>
-                            <p className={style.description}>Bypassing specially designed barriers using secret tricks of the trade. Follow me on a research journey into MacOS aliases.</p>
-                            <div className={style.footer}>
-                                <div className={style.divisor}></div>
-                                <div className={style.tag}>Hacking</div>
-                            </div>
-                        </div>
-                    </article>
+                    <FeaturedPost post={featuredPost}/>
                     <h2 id={style.latestHeader}>Latest Posts</h2>
-                    <div id={style.latestList}>
-                        <PostListItem post={{Date:"9 August 2023", Title:"Injecting XXS Payloads into Web Applications using Three.js", Description:"Bypassing specially designed barriers using secret tricks of the trade. Follow me on a research journey into MacOS aliases.", Tag:"Hacking"}}/>
-                        <PostListItem post={{Date:"9 August 2023", Title:"Injecting XXS Payloads into Web Applications using Three.js", Description:"Bypassing specially designed barriers using secret tricks of the trade. Follow me on a research journey into MacOS aliases.", Tag:"Hacking"}}/>
-                        <PostListItem post={{Date:"9 August 2023", Title:"Injecting XXS Payloads into Web Applications using Three.js", Description:"Bypassing specially designed barriers using secret tricks of the trade. Follow me on a research journey into MacOS aliases.", Tag:"Hacking"}}/>
+                    <div id={style.latest}>
+                        <Outlet context={1}/>  
                     </div>
-                    <div id={style.selector}>
-                        <PostListSelector length={posts.length} current={1}/>   
-                    </div>
+
 
                     <div id={style.search}>
                         <h2 id={style.looking}>Looking for something <span>specific?</span></h2>
@@ -84,42 +70,42 @@ export default function Root() {
                         <CategoryItems categories={[{
                             name: "Hacking",
                             amount: 23,
-                            image: "test-thumbnail.jpeg"
+                            image: "/test-thumbnail.jpeg"
                         },
                         {
                             name: "Cooking",
                             amount: 42,
-                            image: "test-thumbnail.jpeg"
+                            image: "/test-thumbnail.jpeg"
                         },
                         {
                             name: "Programming",
                             amount: 12,
-                            image: "test-thumbnail.jpeg"
+                            image: "/test-thumbnail.jpeg"
                         },
                         {
                             name: "Life",
                             amount: 9,
-                            image: "test-thumbnail.jpeg"
+                            image: "/test-thumbnail.jpeg"
                         },
                         {
                             name: "Gaming",
                             amount: 3,
-                            image: "test-thumbnail.jpeg"
+                            image: "/test-thumbnail.jpeg"
                         },
                         {
                             name: "Building",
                             amount: 52,
-                            image: "test-thumbnail.jpeg"
+                            image: "/test-thumbnail.jpeg"
                         },
                         {
                             name: "Photography",
                             amount: 61,
-                            image: "test-thumbnail.jpeg"
+                            image: "/test-thumbnail.jpeg"
                         },
                         {
                             name: "Fun",
                             amount: 1,
-                            image: "test-thumbnail.jpeg"
+                            image: "/test-thumbnail.jpeg"
                         }
                         ]}
                         />
@@ -131,6 +117,8 @@ export default function Root() {
                     <span>Creation documented <a>here</a></span>
             </footer>
             </div>
+            
+            <ScrollRestoration />
         </>
     )
 }

@@ -1,11 +1,13 @@
 import style from "./postListSelector.module.css";
 
 import {
-    NavLink
+    NavLink,
+    useLocation
 } from "react-router-dom";
 
 export default function PostListSelector({length, current}) {
     let linkList = [current];
+    let {pathname, search} = useLocation();
 
     // start from the current letter
     // work outwards with steps until 
@@ -53,18 +55,22 @@ export default function PostListSelector({length, current}) {
 
     linkList = linkList.map((v) => {
         if(v == 0) return <span>...</span>;
-        if(v == 1) return <NavLink to={`/`} className={({ isActive, isPending }) => isPending ? "pending" : isActive ? style.active : ""} end>{v}</NavLink>
-        
-        return <NavLink to={`/posts/page/` + v} className={({ isActive, isPending }) => isPending ? "pending" : isActive ? style.active : ""} end>{v}</NavLink>
+        if(v == 1 && pathname == "/") return <NavLink to={`/`} preventScrollReset={true} className={({ isActive, isPending }) => isPending ? "pending" : isActive ? style.active : ""} end>{v}</NavLink>
+        if(pathname == "/") return <NavLink to={`/posts/page/` + v} preventScrollReset={true} className={({ isActive, isPending }) => isPending ? "pending" : isActive ? style.active : ""} end>{v}</NavLink>
+
+        return <NavLink to={`/posts/page/` + v + search} preventScrollReset={true} className={({ isActive, isPending }) => isPending ? "pending" : isActive ? style.active : ""} end>{v}</NavLink>
     })
 
     return(
         <>
-        <div id={style.selector}>
-            {
-                linkList
-            }
+        <div id={style.selectorBox}>
+            <div id={style.selector}>
+                {
+                    linkList
+                }
+            </div>
         </div>
+
         </>
     )
 }

@@ -1,7 +1,6 @@
 import CategoryItem from "./categoryItem/categoryItem"
 
 export default function CategoryItems({categories}) {
-    console.log(categories)
     let categoryElements = [];
 
     categories.sort((a, b) => b.amount - a.amount)

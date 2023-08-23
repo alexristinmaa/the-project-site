@@ -1,0 +1,67 @@
+@import "./searchPage.screens.css";
+
+:root {
+    --icon-width: 17px;
+    --input-height: 40px;
+}
+
+#root {
+    padding: 0 32px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#searchHeader {
+    margin: 0px;
+    padding-top: 32px !important;
+    display: flex;
+    gap: 5px;
+}
+
+#tagSelect {
+    appearance: none;
+    border: none;
+    display: inline-block;
+    padding: 4px 6px;
+    padding-left: 14px;
+    border-radius: 5px 0px 0px 5px;
+    background-color: var(--tag-background);
+    color: var(--tag-text);
+    height: var(--input-height);
+    padding-right: 25px;
+}
+
+#searchBar {
+    display:inline-block;
+    width: 100%;
+    margin-bottom: calc(-1 * (var(--icon-width) + 5px));
+}
+
+#searchBar i {
+    position: relative;
+    width: var(--icon-width);
+    height: var(--icon-width);
+    top: -28px;
+    left: 8px;
+}
+
+#searchBar input {
+    padding: 0px;
+    display: inline-block;
+    width: 100%;
+    height: var(--input-height);
+    border: 1px solid var(--lightestgray);
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding-left: 30px;
+
+    font-family: 'Avenir Light';
+
+    font-size: 16px;
+    color: var(--gray);
+}
+
+#searchBar input::placeholder {
+    color: var(--gray);
+}

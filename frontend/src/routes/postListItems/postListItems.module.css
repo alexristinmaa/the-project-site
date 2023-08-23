@@ -1,0 +1,9 @@
+@import "./postListItems.screens.css";
+
+#gridder {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    row-gap: 50px;
+    place-items: center;
+}

@@ -1,0 +1,15 @@
+@media only screen and (max-width: 920px)  {
+    #searchHeader {
+        padding: 0 calc(100% * 0.05) !important;
+    }
+}
+
+@media only screen and (max-width: 700px)  {
+    #searchHeader {
+        flex-direction: column-reverse;
+    }
+
+    #searchBar input {
+        border-radius: 5px !important;
+    }
+}

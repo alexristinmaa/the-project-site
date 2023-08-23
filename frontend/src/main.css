@@ -4,6 +4,7 @@
     --black: #1A1C26;
     --gray: #4F515E;
     --lightgray: #A7A9AD;
+    --lightestgray: #cdcdd6;
     --tag-background: #B5CCDE;
     --tag-text: #172D9C;
     --red: #D84E50;
@@ -31,4 +32,13 @@ body, html {
     width: 16px;
     display: inline-block;
     /* Other styles here */
+    z-index: 100;
   }
+
+a {
+    text-decoration: none;
+}
+
+b {
+    font-weight: bold;
+}

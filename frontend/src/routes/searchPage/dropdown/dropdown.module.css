@@ -1,0 +1,43 @@
+@import "./dropdown.screens.css";
+
+#dropdown {
+    height: 40px;
+    min-width: 250px;
+    width: 250px;
+    padding-left: 10px;
+    background-color: var(--tag-background);
+    color: var(--tag-text);
+    border-radius: 5px;
+    user-select: none;
+}
+
+#active {
+    line-height: 40px;
+}
+
+#droplist {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    background-color: white;
+    z-index: 1000;
+    padding: 10px;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    left: -10px;
+}
+
+.option {
+    padding: 6px 4px;
+    display: block;
+    color: var(--black);
+    border: 1px solid white;
+}
+
+.selected {
+    font-weight: bold;
+    background-color: var(--tag-background);
+    border-radius: 5px;
+    color: var(--tag-text);
+}
