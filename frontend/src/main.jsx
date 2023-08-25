@@ -8,7 +8,7 @@ import {
 import Root, { loader as rootLoader } from "./routes/root";
 import About from "./routes/about";
 import Me from "./routes/me";
-import Post from './routes/post/post'
+import Post, {loader as postLoader} from './routes/post/post'
 import SearchPage, {loader as searchLoader} from './routes/searchPage/searchPage';
 import SearchResults, {loader as searchResultsLoader} from './routes/searchResults/searchResults';
 
@@ -33,6 +33,7 @@ const router = createBrowserRouter([
   {
     path: "posts/:postId",
     element: <Post />,
+    loader: postLoader
   },
   {
     path: "/me",

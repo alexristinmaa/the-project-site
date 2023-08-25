@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -17,8 +18,6 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/julienschmidt/httprouter"
 )
-
-var conn *pgx.Conn
 
 type Post struct {
 	Id          string
@@ -47,6 +46,12 @@ type SearchArguments struct {
 	Search string   `json:"search"`
 }
 
+type PostArguments struct {
+	Id string `json:"id"`
+}
+
+var conn *pgx.Conn
+
 func serveIndex(w http.ResponseWriter, r *http.Request) {
 	// If it has extension -> Handle it as a file, else return index.html
 	cleanUrl := filepath.Clean(r.URL.Path)
@@ -72,7 +77,48 @@ func serveIndex(w http.ResponseWriter, r *http.Request) {
 }
 
 func individualPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	fmt.Fprintf(w, "hello, %s!\n", ps.ByName("postId"))
+	searchArguments := PostArguments{}
+	body, err := ioutil.ReadAll(r.Body)
+
+	err = json.Unmarshal(body, &searchArguments)
+
+	if err != nil || searchArguments.Id == "" {
+		log.Println(err)
+		http.Error(w, "Incorrect data supplied", http.StatusInternalServerError)
+		return
+	}
+
+	defer r.Body.Close()
+
+	post := Post{}
+	var row pgx.Row
+
+	row = conn.QueryRow(context.Background(), "SELECT title, body, author, author_name, tags, date FROM posts WHERE post_id = $1", searchArguments.Id)
+	err = row.Scan(&post.Title, &post.Body, &post.Author, &post.AuthorName, &post.Tags, &post.Date)
+
+	if err != nil {
+		if errors.Is(err, pgx.ErrNoRows) {
+			w.WriteHeader(http.StatusNotFound)
+			w.Header().Add("Content-type", "application/json")
+			fmt.Fprintf(w, "{\"error\":\"No post with id \\\"%s\\\"\"}", searchArguments.Id)
+			return
+		}
+
+		log.Println(err)
+		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
+		return
+	}
+
+	jsonData, err := json.Marshal(post)
+
+	if err != nil {
+		log.Println(err)
+		http.Error(w, "Unknown error occured", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Add("Content-type", "application/json")
+	w.Write(jsonData)
 }
 
 func allPosts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -259,9 +305,9 @@ func main() {
 
 	router := httprouter.New()
 
-	router.GET("/api/posts/:postId", individualPost)
 	router.GET("/api/getTags", getTags)
 
+	router.POST("/api/post", individualPost)
 	router.POST("/api/posts", allPosts)
 
 	mux := http.NewServeMux()

@@ -29,8 +29,6 @@ export default function Dropdown({tags, activeState, changeActive}) {
         summary = <summary value={activeState} id={style.active}>By tag: <b>All tags</b></summary>
     }
 
-    console.log("dropdown", tags)
-
     return(
         <>
             <details id={style.dropdown}>

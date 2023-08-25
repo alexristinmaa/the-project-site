@@ -682,3 +682,10 @@ created by net/http.(*Server).Serve
 2023/08/23 00:48:13 number of field descriptions must equal number of destinations, got 2 and 7
 2023/08/23 00:49:19 number of field descriptions must equal number of destinations, got 6 and 7
 2023/08/23 22:22:37 conn busy
+2023/08/25 13:45:07 no rows in result set
+2023/08/25 13:47:41 no rows in result set
+2023/08/25 13:50:00 no rows in result set
+2023/08/25 13:50:17 no rows in result set
+2023/08/25 13:51:34 no rows in result set
+2023/08/25 13:51:59 no rows in result set
+2023/08/25 13:52:03 no rows in result set
